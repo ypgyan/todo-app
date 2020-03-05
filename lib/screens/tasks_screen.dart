@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/tasks_list.dart';
+import 'add_task_screen.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -14,7 +15,20 @@ class _TasksScreenState extends State<TasksScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
-        onPressed: null,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            // puts modal above keyboard
+            isScrollControlled: true, // makes modal full height
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen(),
+              ),
+            ),
+          );
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
